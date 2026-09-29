@@ -1,8 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
 
-function Memberform() {
-    const [memberData, setmemberData] = useState({})
+function MemberEdit() {
+    const [memberData, setmemberData] = useState({
+
+        // userid: "",
+        // username: "",
+        // tel: "",
+        // email: ""
+    })
 
 
     useEffect(()=>{
@@ -11,12 +17,26 @@ function Memberform() {
     // 회원정보 가져오기
     function getJoins(){
         axios.post("http://192.168.4.253:9092/joins/getJoins", {userid:sessionStorage.getItem("logUserid")})
-        .then()
-        .catch()
+        .then((response)=>{
+            console.log(response.data)
+            setmemberData({
+                            id : response.data.id,
+                            userid:response.data.userid,
+                            username: response.data.username,
+                            tel: response.data.tel,
+                            email : response.data.email,
+                            password : ""
+            })
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
     }
 
 
     const setMemberform = (event) => {
+
+
         const name = event.target.name;
         const value = event.target.value;
 
@@ -30,29 +50,48 @@ function Memberform() {
     // 아이디, 비번 등 정보 등록 
     const memberformCheck = (event) => {
         event.preventDefault(); //action 페이지 이동 해제하는 기능
-
+        console.log(memberData);
         // 정규성 검사
 
+        //비밀번호 존재
+        if(memberData.password==""){
+            alert("비밀번호를 입력하여야 수정이 가능합니다.");
+            return;
+        }
         // 비밀번호 정규성
-        const pwreg = /^[A-Za-z0-9]{8,10}$/
-        if (!pwreg.test(memberData.userpwd)) {
+        const pwreg = /^[A-Za-z0-9]{1,10}$/
+        if (!pwreg.test(memberData.password)) {
             alert("비밀번호는 영대소문자, 숫자를 포함해 8~10자 이내로 가능")
             return;
         }
 
         // 전화번호 정규성
         const phonereg = /^(010|02|031|041|051|061)[-][0-9]{3,4}[-][0-9]{4}$/
-        if (!phonereg.test(memberData.usertel)) {
+        if (!phonereg.test(memberData.tel)) {
             alert("연락처는 010-0000-0000 형식으로 입력");
             return false;
         }
         // 이메일 정규성
         const emailreg = /^[A-Za-z0-9]{5,10}[@][a-zA-Z0-9]{2,6}[.][a-zA-Z]{2,3}([a-zA-Z]{2,3})?$/
-        if (!emailreg.test(memberData.useremail)) {
+        if (!emailreg.test(memberData.email)) {
             alert("이메일을 잘못 입력하였습니다.");
             return false;
         }
 
+
+        axios.post("http://192.168.4.253:9092/joins/joinsEdit", memberData)
+        .then((response)=>{
+            console.log(response);
+            if(response.data.userid==""){
+                alert("수정실패하였습니다... 비밀번호를 확인하신후 다시 수정하세요");
+
+            } else {
+                alert("회원정보가 수정이 완료되었습니다.");
+            }
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
         // 백엔드(DB에서 수정)
 
     }
@@ -70,7 +109,7 @@ function Memberform() {
                 </div>
                 <div className="mb-3">
                     <label for="userpwd" className="form-label">비밀번호</label>
-                    <input type="password" className="form-control" id="userpwd" placeholder="비밀번호를 입력하세요" name="userpwd" required
+                    <input type="password" className="form-control" id="password" placeholder="비밀번호를 입력하세요" name="password" required
                         onChange={setMemberform} />
                 </div>
                 <div className="mb-3">
@@ -80,13 +119,13 @@ function Memberform() {
                 </div>
                 <div className="mb-3">
                     <label for="usertel" className="form-label">연락처</label>
-                    <input type="text" className="form-control" id="usertel" placeholder="연락처(010-1234-5678)를 입력하세요" name="usertel" required
-                        onChange={setMemberform} value={memberData.usertel} />
+                    <input type="text" className="form-control" id="usertel" placeholder="연락처(010-1234-5678)를 입력하세요" name="tel" required
+                        onChange={setMemberform} value={memberData.tel} />
                 </div>
                 <div className="mb-3">
                     <label for="useremail" className="form-label">이메일</label>
-                    <input type="email" className="form-control" id="useremail" placeholder="이메일을 입력하세요" name="useremail" required
-                        onChange={setMemberform} value={memberData.useremail} />
+                    <input type="email" className="form-control" id="useremail" placeholder="이메일을 입력하세요" name="email" required
+                        onChange={setMemberform} value={memberData.email} />
                 </div>
                 <div className="d-grid">
                     <button type="submit" className="btn btn-primary">회원정보 수정하기</button>
@@ -96,4 +135,4 @@ function Memberform() {
     )
 }
 
-export default Memberform
+export default MemberEdit

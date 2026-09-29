@@ -1,7 +1,19 @@
-import { useState } from "react"
+import axios from "axios";
+import { useEffect, useState } from "react"
 
 function Memberform() {
-    const [memberData, setmemberData] = useState({ userid: 'ejjang', uesrpwd: '', username: '홍길동', usertel: '010-1234-5678', useremail: 'abcd12@naver.com' })
+    const [memberData, setmemberData] = useState({})
+
+
+    useEffect(()=>{
+        getJoins()
+    }, [])
+    // 회원정보 가져오기
+    function getJoins(){
+        axios.post("http://192.168.4.253:9092/joins/getJoins", {userid:sessionStorage.getItem("logUserid")})
+        .then()
+        .catch()
+    }
 
 
     const setMemberform = (event) => {

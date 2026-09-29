@@ -41,8 +41,8 @@ function Login() {
                 window.sessionStorage.setItem("logUsername", response.data.username);
                 window.sessionStorage.setItem("logStatus", "Y");
                 
-                // location.href = "/"
-                navigate("/")
+                location.href = "/"
+                // navigate("/")
             }       
         })
         .catch((error)=>{

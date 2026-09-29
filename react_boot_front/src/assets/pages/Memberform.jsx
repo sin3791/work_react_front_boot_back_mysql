@@ -68,8 +68,11 @@ function Memberform() {
         
         //비동기식으로 백엔드 --> DB저장
         axios.post("http://192.168.4.253:9092/joins/joinsForm", memberData)
-        .then(()=>{
-            console.log("회원가입된....", Response)
+        .then((response)=>{
+            console.log("회원가입된....", response)
+            if(response.data!=null && response.data>0){
+                location.href="/login"
+            }
         })
         .catch((error)=>{
             console.log("에러남"+ error)

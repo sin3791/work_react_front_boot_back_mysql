@@ -52,7 +52,7 @@ function Login() {
                 </div>
                 <div className="mb-3">
                     <label for="pwd" className="form-label">비밀번호: </label>
-                    <input type="password" className="form-control" id="userpwd" placeholder="Enter password" name="userpwd"
+                    <input type="password" className="form-control" id="password" placeholder="Enter password" name="password"
                         onChange={setLoginForm} />
                 </div>
                 <div className="d-grid">

@@ -31,10 +31,22 @@ function Login() {
         //비동기식으로 백엔드, userid, password를 가지고 백엔드 요청
         axios.post("http://192.168.4.253:9092/joins/login", loginData)
         .then((response)=>{
-
+            console.log(response)
+            if (!response.data){//정보가 없을때 false, 정보가 있을때 true
+                alert("로그인 실패하였습니다.");
+            } else{
+                //로그인 성공, : id, userid, username, logStatus
+                window.sessionStorage.setItem("logId", response.data.id);
+                window.sessionStorage.setItem("logUserid", response.data.userid);
+                window.sessionStorage.setItem("logUsername", response.data.username);
+                window.sessionStorage.setItem("logStatus", "Y");
+                
+                // location.href = "/"
+                navigate("/")
+            }       
         })
         .catch((error)=>{
-
+            console.log(error)
         })
 
 

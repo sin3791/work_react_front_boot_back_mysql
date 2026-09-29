@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 
@@ -20,20 +21,29 @@ function Login() {
     }
 
     // 아이디, 비번 확인 
-    const logFormCheck = () => {
+    const logFormCheck = (event) => {
         console.log(loginData, loginData.userid)
         event.preventDefault(); //action 페이지 이동 해제하는 기능
 
         // 아이디, 비번 입력 확인
         if (loginData.userid == undefined || loginData.userid == "") return;
-        if (loginData.userpwd == undefined || loginData.userpwd == "") return;
+        if (loginData.password == undefined || loginData.password == "") return;
+        //비동기식으로 백엔드, userid, password를 가지고 백엔드 요청
+        axios.post("http://192.168.4.253:9092/joins/login", loginData)
+        .then((response)=>{
+
+        })
+        .catch((error)=>{
+
+        })
+
 
         // 백엔드(DB에서 확인 후 로그인summit)
         alert("백엔드 수행")
 
         // 로그인 성공: 홈페이지로 이동(sessionStorage에 상태 저장)
-        sessionStorage.setItem("logStatus", "Yes")
-        location.href = "/" // -> 자바스크립트 기반
+        // sessionStorage.setItem("logStatus", "Yes")
+        // location.href = "/" // -> 자바스크립트 기반
         // navi("/") -> 리액트 기능(userNavigate: 어차피 location.href과 똑같음, 다만 변수에 담아서 사용해야 함)
 
 

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>홈페이지</title>
+</head>
+<body>
+    <h1>홈페이지</h1>
+
+
+    <h1>post방식 전송하기</h1>
+    <form method="post" action="/my/infor">
+
+        <input type="text" name = "username" value="홍길동"><br/>
+        <input type="text" name = "age" value="25"/><br/>
+        <input type="submit" value="전송하기"/>
+    </form>
+
+    <h1>post방식 전송하기2</h1>
+    <form method="post" action="/my/infor2">
+        <input type="text" name="userid" value="hong123"/><br/> <!-- 아이디 추가 -->
+        <input type="text" name="username" value="홍길동"/><br/>
+        <input type="text" name="age" value="25"/><br/>
+        <input type="submit" value="데이터전송"/>
+    </form>
+
+
+    <h1>path 주소로 데이터 전송하기</h ㅜ 1>
+    <a href="/test/25000/냉장고">클릭하기</a>
+    <a href="/test?won=25000">클릭해보기</a>
+</body>
+</html>

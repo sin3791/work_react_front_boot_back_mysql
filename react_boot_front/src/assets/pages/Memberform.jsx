@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from "axios";
 function Memberform() {
-    const [memberData, setmemberData] = useState({ userid: '', uesrpwd: '', username: '', usertel: '', useremail: '' })
+    const [memberData, setmemberData] = useState({ userid: '', password: '', username: '', usertel: '', useremail: '' })
 
 
     const setMemberform = (event) => {
@@ -34,7 +34,7 @@ function Memberform() {
 
         // }
 
-        if (memberData.userpwd =""){
+        if (memberData.password =""){
             alert("비밀번호를 입력하세요");
             return false;
         }
@@ -89,7 +89,7 @@ function Memberform() {
                         onChange={setMemberform} />
                 </div>
                 <div className="mb-3">
-                    <label for="userpwd" className="form-label">비밀번호</label>
+                    <label for="password" className="form-label">비밀번호</label>
                     <input type="password" className="form-control" id="userpwd" placeholder="비밀번호를 입력하세요" name="userpwd" required
                         onChange={setMemberform} />
                 </div>

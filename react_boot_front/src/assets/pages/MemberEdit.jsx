@@ -96,8 +96,7 @@ function MemberEdit() {
 
     }
     // useEffect에서 로그인 회원 정보를 DB에서 조회하여야 함
-
-
+ 
     return (
         <div className="container" style={{ width: '500px' }}>
             <h1 style={{ textAlign: 'center' }}>회원정보 수정</h1>
@@ -130,7 +129,12 @@ function MemberEdit() {
                 <div className="d-grid">
                     <button type="submit" className="btn btn-primary">회원정보 수정하기</button>
                 </div>
+
+
             </form>
+            <div className="d-grid">
+                <button type ="submit" className="btn btn-danger">회원정보 탈퇴하기</button>
+            </div>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from "axios";
 function Memberform() {
-    const [memberData, setmemberData] = useState({ userid: '', password: '', username: '', usertel: '', useremail: '' })
+    const [memberData, setmemberData] = useState({ userid: '', password: '', username: '', tel: '', email: '' })
 
 
     const setMemberform = (event) => {
@@ -17,6 +17,7 @@ function Memberform() {
 
     // 아이디, 비번 등 정보 등록 
     const memberformCheck = (event) => {
+        console.log(memberData)
         event.preventDefault(); //action 페이지 이동 해제하는 기능
 
         // 정규성 검사
@@ -34,7 +35,7 @@ function Memberform() {
 
         // }
 
-        if (memberData.password =""){
+        if (memberData.password ==""){
             alert("비밀번호를 입력하세요");
             return false;
         }
@@ -51,19 +52,19 @@ function Memberform() {
         }
         // 전화번호 정규성
         const phonereg = /^(010|02|031|041|051|061)[-][0-9]{3,4}[-][0-9]{4}$/
-        if (!phonereg.test(memberData.usertel)) {
+        if (!phonereg.test(memberData.tel)) {
             alert("연락처는 010-0000-0000 형식으로 입력");
             return false;
         }
         // 이메일 정규성
         const emailreg = /^[A-Za-z0-9]{5,10}[@][a-zA-Z0-9]{2,6}[.][a-zA-Z]{2,3}([a-zA-Z]{2,3})?$/
-        if (!emailreg.test(memberData.useremail)) {
+        if (!emailreg.test(memberData.email)) {
             alert("이메일을 잘못 입력하였습니다.");
             return false;
         }
 
         // 백엔드(DB에서 확인 후 로그인summit)
-        alert("회원 등록")
+        // alert("회원 등록")
         
         //비동기식으로 백엔드 --> DB저장
         axios.post("http://192.168.4.253:9092/joins/joinsForm", memberData)
@@ -76,7 +77,7 @@ function Memberform() {
 
 
         // 로그인 페이지로 이동
-        location.href = '/login'
+        // location.href = '/login'
     }
 
     return (
@@ -90,7 +91,7 @@ function Memberform() {
                 </div>
                 <div className="mb-3">
                     <label for="password" className="form-label">비밀번호</label>
-                    <input type="password" className="form-control" id="userpwd" placeholder="비밀번호를 입력하세요" name="userpwd" required
+                    <input type="password" className="form-control" id="password" placeholder="비밀번호를 입력하세요" name="password" required
                         onChange={setMemberform} />
                 </div>
                 <div className="mb-3">
@@ -100,12 +101,12 @@ function Memberform() {
                 </div>
                 <div className="mb-3">
                     <label for="usertel" className="form-label">연락처</label>
-                    <input type="text" className="form-control" id="usertel" placeholder="연락처(010-1234-5678)를 입력하세요" name="usertel" required
+                    <input type="text" className="form-control" id="tel" placeholder="연락처(010-1234-5678)를 입력하세요" name="tel" required
                         onChange={setMemberform} />
                 </div>
                 <div className="mb-3">
                     <label for="useremail" className="form-label">이메일</label>
-                    <input type="email" className="form-control" id="useremail" placeholder="이메일을 입력하세요" name="useremail" required
+                    <input type="email" className="form-control" id="email" placeholder="이메일을 입력하세요" name="email" required
                         onChange={setMemberform} />
                 </div>
                 <div className="d-grid">

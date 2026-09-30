@@ -1,6 +1,8 @@
 import { Link, Outlet } from 'react-router-dom'
 import Footer from '../pages/Footer'
 import '../css/top.css'
+import {useEffect, useState} from 'react'
+
 const logoutFnc = () => {
     // 로그아웃: 로그인 정보를 지우고 홈페이지로 이동(sessionStorage 삭제)
     // sessionStorage.removeItem("logStatus") -> 특정 세션스토리지만 지울 때 사용
@@ -16,6 +18,10 @@ const logoutFnc = () => {
 }
 
 function Layout() {
+    const [username, setUsername] = useState("")
+    useEffect(()=>{
+        setUsername(sessionStorage.getItem("logUsername"))
+    },[])
     return (
         <>
             <div className="container top-menu">
@@ -28,7 +34,7 @@ function Layout() {
                 }
 
                 {(sessionStorage.getItem("logStatus") != null && sessionStorage.getItem("logStatus") == "Y")
-                    && (<div onClick={logoutFnc}><Link>로그아웃</Link></div>)
+                    && (<div onClick={logoutFnc}><Link> {username}님로그아웃</Link></div>)
                 }
 
                 {(sessionStorage.getItem("logStatus") != null && sessionStorage.getItem("logStatus") == "Y")

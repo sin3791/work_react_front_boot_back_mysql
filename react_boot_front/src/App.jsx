@@ -24,12 +24,16 @@ function App() {
         <Route path="/" element={<Layout />}>
           {/* outlet에 표시할 기본(첫) 페이지 컴포넌트 설정 */}
           <Route index element={<Home />}></Route>
+          {/* 비동기 연습 */}
           <Route path="/asynch" element={<AsynchPage/>}></Route>
           <Route path="/fetch" element={<FetchPage/>}></Route>
           <Route path="/axios" element={<AxoisPage/>}></Route>
+          {/* 회원인증 */}
           <Route path="/login" element={<Login />}></Route>
           <Route path="/memberform" element={<Memberform />}></Route>
           <Route path="/memberEdit" element={<MemberEdit />}></Route>
+
+          {/* 게시판 */}
           <Route path="/board/list" element={<BoardList />}></Route>
           <Route path="/board/write" element={<BoardWrite />}></Route>
         </Route>

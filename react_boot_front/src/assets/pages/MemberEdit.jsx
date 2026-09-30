@@ -95,6 +95,12 @@ function MemberEdit() {
         // 백엔드(DB에서 수정)
 
     }
+
+    function unRegister(){
+        //탈퇴 확인하여 삭제한다
+        var que = confirm("정말로 회원탈퇴하시겠습니까?");
+    }
+    
     // useEffect에서 로그인 회원 정보를 DB에서 조회하여야 함
  
     return (
@@ -133,7 +139,7 @@ function MemberEdit() {
 
             </form>
             <div className="d-grid">
-                <button type ="submit" className="btn btn-danger">회원정보 탈퇴하기</button>
+                <button className="btn btn-danger" onClick = {unRegister}s>회원정보 탈퇴하기</button>
             </div>
         </div>
     )

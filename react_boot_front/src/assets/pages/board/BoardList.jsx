@@ -42,7 +42,7 @@ function BoardList() {
             <div className="board-title">게시판목록</div>
             {/* 로그인 시 글쓰기 */}
             {
-                sessionStorage.getItem("logStatus") != null && sessionStorage.getItem("logStatus") == "Yes" &&
+                sessionStorage.getItem("logStatus") != null && sessionStorage.getItem("logStatus") == "Y" &&
                 <div>
                     <Link to="/board/write">글쓰기</Link>
                 </div>

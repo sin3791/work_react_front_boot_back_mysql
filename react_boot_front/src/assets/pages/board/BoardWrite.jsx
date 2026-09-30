@@ -44,14 +44,14 @@ function BoardWrite() {
     return (
         <div>
             <div className='container'>
-                <div>게시판 글쓰기(ToastEditer)</div>
-                <input type='text' name='title' id='title' style={{ width: "90%", padding: "10px", margin: "10px" }} onChange={titleChange} />
+                <h2>게시판 글쓰기(ToastEditer)</h2>
+                <input type='text' name='title' id='title' style={{ width: "90%", padding: "10px", margin: "10px 0" }} onChange={titleChange} />
 
                 <Editor
                     ref={editorRef}
                     initialValue=""
                     previewStyle="vertical"
-                    height="600px"
+                    height="500px"
                     initialEditType="wysiwyg"
                     useCommandShortcut={false}
                     hideModeSwitch={true}

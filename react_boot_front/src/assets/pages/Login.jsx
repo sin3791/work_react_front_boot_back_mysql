@@ -7,7 +7,7 @@ function Login() {
     // const navi = useNavigate();
 
     // 아이디와 비번을 저장할 변수 생성
-    const [loginData, setloginData] = useState({})
+    const [loginData, setloginData] = useState({userid:'Saoji112', password:'adsdsad'})
 
     // form데이터를 useState변수에 set
     const setLoginForm = (event) => {
@@ -70,12 +70,12 @@ function Login() {
                 <div className="mb-3 mt-3">
                     <label for="text" className="form-label">아이디: </label>
                     <input type="text" className="form-control" id="userid" placeholder="Enter ID" name="userid"
-                        onChange={setLoginForm} />
+                        onChange={setLoginForm} value={loginData.userid}/>
                 </div>
                 <div className="mb-3">
                     <label for="pwd" className="form-label">비밀번호: </label>
                     <input type="password" className="form-control" id="password" placeholder="Enter password" name="password"
-                        onChange={setLoginForm} />
+                        onChange={setLoginForm} value={loginData.password}/>
                 </div>
                 <div className="d-grid">
                     <button type="submit" className="btn btn-primary">Login</button>

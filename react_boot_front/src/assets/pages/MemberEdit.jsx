@@ -101,7 +101,7 @@ function MemberEdit() {
         var que = confirm("정말로 회원탈퇴하시겠습니까?");
         
         if (que){//탈퇴할 경우
-            axios.delete("http://192.168.4.253:9092/joins/unregister"+sessionStorage.getItem("logId"))
+            axios.delete("http://192.168.4.253:9092/joins/unregister/"+sessionStorage.getItem("logId"))
             .then((response)=>{
                  //회원탈퇴가 되었는지 확인, 0:탈퇴, 그외: 탈퇴실패
                  //sessionStroage의 로그인 정보 지우고, 

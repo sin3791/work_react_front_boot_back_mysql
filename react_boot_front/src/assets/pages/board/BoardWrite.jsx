@@ -4,25 +4,27 @@ import color from '@toast-ui/editor-plugin-color-syntax'
 import 'tui-color-picker/dist/tui-color-picker.css'
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css'
 import { useRef, useState } from 'react'
-
+import axios from 'axios'
 function BoardWrite() {
     // 제목을 보관할 변수
-    const [title, setTitle] = useState('')
+    const [subject, setSubject] = useState('')
     // 내용을 보관할 변수
     const editorRef = useRef()
 
-    const titleChange = (event) => {
-        setTitle(event.target.value);
+    const subjectChange = (event) => {
+        setSubject(event.target.value);
     }
     const handleBoard = () => {
         // HTML태그로 글내용 얻어오기
         // console.log('글내용: ', editorRef.current?.getInstance().getHTML())
 
+        console.log('subject=>', subject);
         // MarkDown으로 글내용 얻어오기
-        const content = editorRef.current?.getInstance().getMarkdown()
-
+        const content = editorRef.current?.getInstance().getHTML()
+        
+        
         // 유효성검사 : 제목, 글내용
-        if (title == "") {
+        if (subject == "") {
             alert('제목을 입력해주세요')
             return;
         }
@@ -33,19 +35,29 @@ function BoardWrite() {
 
         // axios를 이용한 백엔드 호출(제목, 글내용, 글쓴이) => json타입으로 보냄
         const boardData = {
-            title: title,
+            subject: subject,
             content: content,
-            userid: sessionStorage.getItem("logId")
+            joinsEntity: {id:sessionStorage.getItem("logId")}
         }
         console.log(boardData)
+        axios.post("http://192.168.4.253:9092/board/boardWrite", boardData)
+        .then((response)=>{
+            console.log(response) 
+            // 등록여부에 따라 현재페이지 유지
+            
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
         // 등록여부에 따라 현재페이지 유지
+
         // 등록 성공 시 목록으로 이동
     }
     return (
         <div>
             <div className='container'>
                 <h2>게시판 글쓰기(ToastEditer)</h2>
-                <input type='text' name='title' id='title' style={{ width: "90%", padding: "10px", margin: "10px 0" }} onChange={titleChange} />
+                <input type='text' name='subject' id='subject' style={{ width: "90%", padding: "10px", margin: "10px 0" }} onChange={subjectChange} />
 
                 <Editor
                     ref={editorRef}

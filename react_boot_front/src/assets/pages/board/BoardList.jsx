@@ -11,7 +11,7 @@ function BoardList() {
     // 현재페이지, 총레코드수, 총페이지수, 시작페이지, 검색어, 검색키..
     const [pageInfo, setPageInfo] = useState({ nowPage: 1, totalRecord: 16, totalPage: 12, startPage: 1 })
     // 출력할 페이지번호
-    const [pageNum, setpageNum] = useState([6, 7, 8, 9, 10])
+    const [pageNum, setpageNum] = useState([])
     // 검색어, 검색키를 담을 변수
     const [searchData, setsearchData] = useState({
         searchKey: 'subject',
@@ -25,7 +25,7 @@ function BoardList() {
         console.log(searchData)
     }
     useEffect(()=>{
-        getBoardList(2);
+        getBoardList(1);
     },[])
 
     // 데이터베이스에서 해당 페이지 레코드정보, 페이지(검색어) 관련 response
@@ -49,8 +49,21 @@ function BoardList() {
             setPageInfo({nowPage:res.data.pages.nowPage,
                 totalRecord:res.data.pages.totalRecord,
                 totalPage:res.data.pages.totalPage,
-                startPage:res.data.pages.startPage        
+                startPage:res.data.pages.startPage    
+                
+                
+                // 페이지 번호
+               
             });
+            setpageNum([])
+            const pageNumTemp= [];
+            for(var p = res.data.pages.startPageNum; p< res.data.pages.startPageNum+res.data.pages.onePageNumCount; p++) {
+                if(p <= res.data.pages.totalPage){
+                    pageNumTemp.push(p);
+
+                }
+            }
+            setpageNum(pageNumTemp);
         })
         .catch((e)=>{
             console.log("게시판에러-->",e);

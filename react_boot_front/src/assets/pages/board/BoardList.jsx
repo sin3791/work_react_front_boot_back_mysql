@@ -30,7 +30,12 @@ function BoardList() {
 
     // 데이터베이스에서 해당 페이지 레코드정보, 페이지(검색어) 관련 response
     const getBoardList = (pNum) => {
-        axios.get("http://192.168.4.253:9092/board/boardList?nowPage="+pNum)
+
+        var queryData = "?nowPage=" + pageInfo.nowPage;
+        if (searchData.searchWord!=''){
+            queryData += "&searchKey=" + searchData.searchKey+"&searchWord="+searchData.searchWord
+        }
+        axios.get(`http://192.168.4.253:9092/board/boardList${queryData}`)
         .then((res)=>{
             console.log("게시판목록-->",res);
 
@@ -95,7 +100,7 @@ function BoardList() {
                         <option value="userid">작성자</option>
                     </select>
                     <input type="text" name="searchWord" placeholder="검색어입력" onChange={setSearchWord} />
-                    <input type="button" value="검색" className="btn btn-info" />
+                    <input type="button" value="검색" className="btn btn-info" onClick={()=>getBoardList(1)} />
                 </div>
                 <div className="col-sm-2" style={{ textAlign: 'right' }}>{pageInfo.nowPage}/{pageInfo.totalPage}</div>
             </div>
@@ -103,7 +108,7 @@ function BoardList() {
             {/* 게시판 목록 */}
             <div className='list'>
                 <div className="row" style={{ fontWeight: 'bold' }}>
-                    <div className="col-sm-1 p-3">번호</div>
+                    <div className="col-sm-1 p-3">번호</div> 
                     <div className="col-sm-7 p-3">제목</div>
                     <div className="col-sm-1 p-3">작성자</div>
                     <div className="col-sm-1 p-3">조회수</div>

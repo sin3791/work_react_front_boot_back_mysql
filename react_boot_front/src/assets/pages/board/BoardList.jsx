@@ -9,7 +9,7 @@ function BoardList() {
   
     // 페이지번호 관련 정보를 보관할 변수
     // 현재페이지, 총레코드수, 총페이지수, 시작페이지, 검색어, 검색키..
-    const [pageInfo, setPageInfo] = useState({ nowPage: 8, totalRecod: 16, totalPage: 10, startPage: 6 })
+    const [pageInfo, setPageInfo] = useState({ nowPage: 1, totalRecord: 16, totalPage: 12, startPage: 1 })
     // 출력할 페이지번호
     const [pageNum, setpageNum] = useState([6, 7, 8, 9, 10])
     // 검색어, 검색키를 담을 변수
@@ -25,12 +25,12 @@ function BoardList() {
         console.log(searchData)
     }
     useEffect(()=>{
-        getBoardList(1);
+        getBoardList(2);
     },[])
 
     // 데이터베이스에서 해당 페이지 레코드정보, 페이지(검색어) 관련 response
     const getBoardList = (pNum) => {
-        axios.get("http://192.168.4.253:9092/board/boardList")
+        axios.get("http://192.168.4.253:9092/board/boardList?nowPage="+pNum)
         .then((res)=>{
             console.log("게시판목록-->",res);
 
@@ -43,6 +43,13 @@ function BoardList() {
                                 {id: record.id, subject:record.subject, username:record.joinsEntity.username, 
                                 hit:record.hit, writedate:record.createDateTime}]
                 })
+            });
+
+            //페이지 정보처리 { nowPage: 1, totalRecod: 16, totalPage: 12, startPage: 1 }
+            setPageInfo({nowPage:res.data.pages.nowPage,
+                totalRecord:res.data.pages.totalRecord,
+                totalPage:res.data.pages.totalPage,
+                startPage:res.data.pages.startPage        
             });
         })
         .catch((e)=>{
@@ -65,7 +72,7 @@ function BoardList() {
                 </div>
             }
             <div className="row">
-                <div className="col-sm-2">총레코드수 : {pageInfo.totalRecod}개</div>
+                <div className="col-sm-2">총레코드수 : {pageInfo.totalRecord}개</div>
                 <div className='col-sm-8' style={{ textAlign: 'center' }}>
                     {/* 검색(제목, 글쓴이, 글내용) */}
                     {/* 검색키 */}

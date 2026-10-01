@@ -1,17 +1,12 @@
 import { Link } from 'react-router-dom'
 import '/src/assets/css/board.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios';
 
 function BoardList() {
     // 해당페이지의 레코드를 담을 변수
-    const [boardList, setBoardList] = useState([{
-        no: 100, subject: '현대차 파업, 판매 1위 그랜저까지 멈춘다.', username: '홍길동', hit: 10, writedate: '07-20 10:12'
-    },
-    { no: 99, subject: '현대차 파업, 판매 1위 그랜저까지 멈춘다.', username: '홍길동', hit: 10, writedate: '07-20 10:12' },
-    { no: 98, subject: '현대차 파업, 판매 1위 그랜저까지 멈춘다.', username: '홍길동', hit: 10, writedate: '07-20 10:12' },
-    { no: 97, subject: '현대차 파업, 판매 1위 그랜저까지 멈춘다.', username: '홍길동', hit: 10, writedate: '07-20 10:12' },
-    { no: 96, subject: '현대차 파업, 판매 1위 그랜저까지 멈춘다.', username: '홍길동', hit: 10, writedate: '07-20 10:12' }]);
-
+    const [boardList, setBoardList] = useState([]);
+  
     // 페이지번호 관련 정보를 보관할 변수
     // 현재페이지, 총레코드수, 총페이지수, 시작페이지, 검색어, 검색키..
     const [pageInfo, setPageInfo] = useState({ nowPage: 8, totalRecod: 16, totalPage: 10, startPage: 6 })
@@ -29,9 +24,31 @@ function BoardList() {
         })
         console.log(searchData)
     }
+    useEffect(()=>{
+        getBoardList(1);
+    },[])
 
     // 데이터베이스에서 해당 페이지 레코드정보, 페이지(검색어) 관련 response
     const getBoardList = (pNum) => {
+        axios.get("http://192.168.4.253:9092/board/boardList")
+        .then((res)=>{
+            console.log("게시판목록-->",res);
+
+            setBoardList([]);
+            //필요한 정보(id, subject, username, hit, create_dateTime)
+            res.data.boardList.map((record)=>{
+                //useState변수에 셋팅하기
+                setBoardList((prev)=>{
+                    return [...prev, 
+                                {id: record.id, subject:record.subject, username:record.joinsEntity.username, 
+                                hit:record.hit, writedate:record.createDateTime}]
+                })
+            });
+        })
+        .catch((e)=>{
+            console.log("게시판에러-->",e);
+        })
+        //게시판 목록 페이지는 자동으로 서버에서 레코드 가져와 -> boardlist에 setting
         setPageInfo((previous) => {
             return { ...previous, nowPage: pNum }
         })
@@ -75,7 +92,7 @@ function BoardList() {
                 {
                     boardList.map((record, idx) => {
                         return < div className="row" key={idx}>
-                            <div className="col-sm-1 p-3">{record.no}</div>
+                            <div className="col-sm-1 p-3">{record.id}</div>
                             <div className="col-sm-7 p-3">{record.subject}</div>
                             <div className="col-sm-1 p-3">{record.username}</div>
                             <div className="col-sm-1 p-3">{record.hit}</div>

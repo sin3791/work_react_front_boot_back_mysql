@@ -43,6 +43,10 @@ function BoardWrite() {
         axios.post("http://192.168.4.253:9092/board/boardWrite", boardData)
         .then((response)=>{
             console.log(response) 
+
+            if(response.data=="OK"){
+                location.href="/board/list";
+            }
             // 등록여부에 따라 현재페이지 유지
             
         })
@@ -57,7 +61,7 @@ function BoardWrite() {
         <div>
             <div className='container'>
                 <h2>게시판 글쓰기(ToastEditer)</h2>
-                <input type='text' name='subject' id='subject' style={{ width: "90%", padding: "10px", margin: "10px 0" }} onChange={subjectChange} />
+                <input type='text' name='subject' id='subject' style={{ width: "90%", padding: "10px", margin: "10px 0" }} onChange={subjectChange} maxLength={200}/>
 
                 <Editor
                     ref={editorRef}

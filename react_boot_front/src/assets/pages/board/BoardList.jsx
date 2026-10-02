@@ -30,8 +30,9 @@ function BoardList() {
 
     // 데이터베이스에서 해당 페이지 레코드정보, 페이지(검색어) 관련 response
     const getBoardList = (pNum) => {
+        
 
-        var queryData = "?nowPage=" + pageInfo.nowPage;
+        var queryData = "?nowPage=" + pNum;
         if (searchData.searchWord!=''){
             queryData += "&searchKey=" + searchData.searchKey+"&searchWord="+searchData.searchWord
         }

@@ -9,12 +9,17 @@ import AxoisPage from "./assets/pages/AxiosPage"
 import Login from './assets/pages/Login'
 import Memberform from "./assets/pages/Memberform"
 import MemberEdit from "./assets/pages/MemberEdit"
+import BoardView from "./assets/pages/board/BoardView"
+import BoardEdit from "./assets/pages/board/BoardEdit"
+
 import AdminLayout from "./assets/pages/Admin/AdminLayout"
 import MemberList from "./assets/pages/admin/MemberList"
 import BoardList from "./assets/pages/board/BoardList"
 import BoardWrite from "./assets/pages/board/BoardWrite"
 
 
+import DataList from "./assets/pages/data/DataList"
+import DataWrite from "./assets/pages/data/DataWrite"
 function App() {
 
 
@@ -36,6 +41,11 @@ function App() {
           {/* 게시판 */}
           <Route path="/board/list" element={<BoardList />}></Route>
           <Route path="/board/write" element={<BoardWrite />}></Route>
+          <Route path="/board/view/:id" element={<BoardView />}></Route>
+          <Route path="/board/boardEdit/:id" element={<BoardEdit />}></Route>
+
+          <Route path="/data/dataList" element={<DataList />}></Route>
+          <Route path="/data/dataWrite" element={<DataWrite />}></Route>
         </Route>
 
         <Route path="/admin/home" element={<AdminLayout />}>

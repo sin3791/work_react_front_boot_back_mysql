@@ -53,7 +53,7 @@ function Layout() {
                 <div><Link to="/fetch">fetch</Link></div>
                 <div><Link to="/axios">axios</Link></div>
                 <div><Link to="/board/list">뉴스게시판</Link></div>
-                <div><Link to="">자료실</Link></div>
+                <div><Link to="/data/dataList">자료실</Link></div>
             </div>
 
             <Outlet />

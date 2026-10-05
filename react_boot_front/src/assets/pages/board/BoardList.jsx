@@ -119,7 +119,7 @@ function BoardList() {
                     boardList.map((record, idx) => {
                         return < div className="row" key={idx}>
                             <div className="col-sm-1 p-3">{record.id}</div>
-                            <div className="col-sm-7 p-3">{record.subject}</div>
+                            <div className="col-sm-7 p-3"><Link to ={`/board/view/${record.id}`}>{record.subject}</Link></div>
                             <div className="col-sm-1 p-3">{record.username}</div>
                             <div className="col-sm-1 p-3">{record.hit}</div>
                             <div className="col-sm-2 p-3">{record.writedate}</div>

@@ -55,7 +55,7 @@ function DataWrite() {
         formData.append("content", content);
         formData.append("joinsEntity.id",sessionStorage.getItem("logId"));
         //첨부파일을 통해 추가하기
-        for(var i=1; i<files.length; i++){
+        for(var i=0; i<files.length; i++){
             formData.append("files", files[i]);
         }
         axios.post('http://192.168.4.253:9092/data/dataWrite', formData, {
@@ -88,7 +88,7 @@ function DataWrite() {
                 />
 
                 {/* 에디터 */}
-                <Editor
+                <Editor 
                     ref={editorRef}
                     initialValue=""
                     previewStyle="vertical"

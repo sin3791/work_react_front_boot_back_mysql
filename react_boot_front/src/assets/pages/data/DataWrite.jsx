@@ -65,6 +65,11 @@ function DataWrite() {
         })
         .then((res) => {
             console.log(res.data)
+            if(res.data == "Ok"){
+                location.href = "/data/dataList";
+            }else{
+                alert("자료실 글 등록 실패")
+            }
         })
         .catch((e) => {
             console.log(e)
@@ -84,7 +89,7 @@ function DataWrite() {
                     id='subject' 
                     style={{ width: "90%", padding: "10px", margin: "10px 0" }} 
                     onChange={subjectChange} 
-                    maxLength={200}
+                    // maxLength={200}
                 />
 
                 {/* 에디터 */}

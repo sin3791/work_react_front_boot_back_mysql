@@ -20,6 +20,7 @@ import BoardWrite from "./assets/pages/board/BoardWrite"
 
 import DataList from "./assets/pages/data/DataList"
 import DataWrite from "./assets/pages/data/DataWrite"
+import DataDetail from "./assets/pages/data/DataDetail"
 function App() {
 
 
@@ -46,6 +47,7 @@ function App() {
 
           <Route path="/data/dataList" element={<DataList />}></Route>
           <Route path="/data/dataWrite" element={<DataWrite />}></Route>
+          <Route path="/data/dataDetail/:id" element={<DataDetail />}></Route>
         </Route>
 
         <Route path="/admin/home" element={<AdminLayout />}>

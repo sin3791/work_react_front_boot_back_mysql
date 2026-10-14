@@ -1,6 +1,10 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react"
 import { useParams } from "react-router-dom";
+
+
+import { serverUrl } from "../../common/config";
+
 // 1. 올바르게 import 되었는지 확인
 function DataDetail(){
     const {id} = useParams()
@@ -21,7 +25,7 @@ function DataDetail(){
 
     function getDataDetail(){
     
-        axios.get(`http://192.168.4.253:9092/data/dataDetail/${id}`)
+        axios.get(`${serverUrl}/data/dataDetail/${id}`)
         .then((res)=>{
             console.log(res.data)
             setData(res.data)
@@ -35,7 +39,7 @@ function DataDetail(){
     const downloadFile = async(downFile)=>{
         alert(downFile);
 
-        const res = await axios.get(`http://192.168.4.253:9092/data/file/download/${downFile}`, 
+        const res = await axios.get(`${serverUrl}/data/file/download/${downFile}`, 
                                     {responseType: 'blob'})
         
         const url =window.URL.createObjectURL(new Blob([res.data]))
@@ -92,7 +96,7 @@ function DataDetail(){
                             return (
                                 // .${imageData.extname}
                                 // <img src={`http://192.168.4.253:9092/uploads/${encodeURIComponent(imageData.filename)}`}
-                                <img src={`http://192.168.4.253:9092/uploads/${imageData.filename}.${imageData.extname}`}                                
+                                <img src={`${serverUrl}/uploads/${imageData.filename}.${imageData.extname}`}                                
                                 style={{width:"180px", height: "100px", margin: "10px", cursor: "pointer"}}    
                                 key={idx} alt={imageData.filename}
                                 onClick={()=>{downloadFile(`${imageData.filename}.${imageData.extname}`)}}
@@ -101,11 +105,19 @@ function DataDetail(){
                         })
                     }</div>
             </div>
-
-            <div>
-                <button type="button" className="btn btn-primary">수정</button>
-                <button type="button" className="btn btn-success">삭제</button>
-            </div>
+            <br />
+            {
+                (data.joinsEntity?.username == sessionStorage.getItem("logUsername"))
+                &&
+                (
+                    <div>
+                        <button type="button" className="btn btn-primary" 
+                                onClick={()=>window.location.href=`/data/dataEdit/${data.id}`}>자료실 수정</button>
+                        <button type="button" className="btn btn-success">자료실 삭제</button>
+                    </div> 
+                )
+            }
+            
         </div>
     )
 }

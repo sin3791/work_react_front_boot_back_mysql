@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from 'axios'; // 👈 이 줄을 꼭 추가해 주어야 합니다!
 
+import { serverUrl } from "../common/config";
 function AxoisPage(){
     
     const [result, setResult] = useState("");
@@ -12,7 +13,7 @@ function AxoisPage(){
 
     // get방식 요청하기
     function axiosGetTest(){
-        axios.get("http://192.168.4.253:9092/axiosGetTest",{
+        axios.get(serverUrl+"/axiosGetTest",{
             params : {
                 now_pages:5,
                 searchWord: "빅데이터"
@@ -30,7 +31,7 @@ function AxoisPage(){
 
     
     function axiosPostTest(){
-        axios.post("http://192.168.4.253:9092/axiosPostTest",{
+        axios.post(serverUrl+"/axiosPostTest",{
             proName : "싸이클",
             price : "12500"
         })

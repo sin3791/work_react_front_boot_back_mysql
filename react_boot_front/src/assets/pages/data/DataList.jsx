@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom';
 import axios from "axios"
 
+import { serverUrl } from "../../common/config";
+
 function DataList(){
 
     const [dataList, setDataList] = useState([]);
@@ -12,7 +14,7 @@ function DataList(){
     function getDataList(){
 
         
-        axios.get("http://192.168.4.253:9092/data/dataList")
+        axios.get(serverUrl+"/data/dataList")
         .then((res)=>{
             console.log(res.data);
             setDataList(res.data);

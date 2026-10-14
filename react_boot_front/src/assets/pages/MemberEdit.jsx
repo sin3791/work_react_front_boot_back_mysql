@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
 
+import {serverUrl} from "../common/config";
+
 function MemberEdit() {
     const [memberData, setmemberData] = useState({
 
@@ -16,7 +18,7 @@ function MemberEdit() {
     }, [])
     // 회원정보 가져오기
     function getJoins(){
-        axios.post("http://192.168.4.253:9092/joins/getJoins", {userid:sessionStorage.getItem("logUserid")})
+        axios.post(serverUrl+"/joins/getJoins", {userid:sessionStorage.getItem("logUserid")})
         .then((response)=>{
             console.log(response.data)
             setmemberData({
@@ -79,7 +81,7 @@ function MemberEdit() {
         }
 
 
-        axios.post("http://192.168.4.253:9092/joins/joinsEdit", memberData)
+        axios.post(serverUrl+"/joins/joinsEdit", memberData)
         .then((response)=>{
             console.log(response);
             if(response.data.userid==""){
@@ -101,7 +103,7 @@ function MemberEdit() {
         var que = confirm("정말로 회원탈퇴하시겠습니까?");
         
         if (que){//탈퇴할 경우
-            axios.delete("http://192.168.4.253:9092/joins/unregister/"+sessionStorage.getItem("logId"))
+            axios.delete(serverUrl+"/joins/unregister/"+sessionStorage.getItem("logId"))
             .then((response)=>{
                  //회원탈퇴가 되었는지 확인, 0:탈퇴, 그외: 탈퇴실패
                  //sessionStroage의 로그인 정보 지우고, 

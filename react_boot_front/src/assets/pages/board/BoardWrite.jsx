@@ -5,6 +5,8 @@ import 'tui-color-picker/dist/tui-color-picker.css'
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css'
 import { useRef, useState } from 'react'
 import axios from 'axios'
+
+import { serverUrl } from "../../common/config";
 function BoardWrite() {
     // 제목을 보관할 변수
     const [subject, setSubject] = useState('')
@@ -40,7 +42,7 @@ function BoardWrite() {
             joinsEntity: {id:sessionStorage.getItem("logId")}
         }
         console.log(boardData)
-        axios.post("http://192.168.4.253:9092/board/boardWrite", boardData)
+        axios.post(serverUrl+"http://192.168.4.253:9092/board/boardWrite", boardData)
         .then((response)=>{
             console.log(response) 
 

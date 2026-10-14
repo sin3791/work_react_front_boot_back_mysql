@@ -1,12 +1,13 @@
 import { useState } from "react";
 
+import { serverUrl } from "../common/config";
 function FetchPage(){
     //상품정보
     const [product, setProduct] = useState([])
     //상품정보 목록
     const [productList, setProductList] = useState([])
     function fetchStart(){
-        fetch("http://192.168.4.253:9092/fetchTest?title=연습중&content=fetch를 이용한 비동기 테스트&hit=12",{method:"get"})
+        fetch(serverUrl+"/fetchTest?title=연습중&content=fetch를 이용한 비동기 테스트&hit=12",{method:"get"})
         .then(response=>{
 
             if(!response)
@@ -30,7 +31,7 @@ function FetchPage(){
 
     //post방식 비동기 호출
     function fetchPostStart(){
-        fetch("http://192.168.4.253:9092/fetchPostTest",{
+        fetch(serverUrl+"/fetchPostTest",{
             method:'post',
             headers:{
                 "Content-type" : "application/x-www-form-unlencoded"

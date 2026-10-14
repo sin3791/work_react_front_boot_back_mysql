@@ -6,6 +6,9 @@ import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+
+import { serverUrl } from "../../common/config";
+
 function BoardEdit() {
     // 제목을 보관할 변수
 
@@ -17,7 +20,7 @@ function BoardEdit() {
         getBoard()
     }, [])
     function getBoard(){
-            axios.get(`http://192.168.4.253:9092/board/boardEdit/${id}`)        
+            axios.get(`${serverUrl}/board/boardEdit/${id}`)        
             .then((res)=>{
 
             // console.log(res.data)
@@ -71,7 +74,7 @@ function BoardEdit() {
         console.log(boardData)
 
 
-        axios.post("http://192.168.4.253:9092/board/boardEditOk", boardData)
+        axios.post(serverUrl+"/board/boardEditOk", boardData)
         .then((response)=>{
             console.log(response) 
 

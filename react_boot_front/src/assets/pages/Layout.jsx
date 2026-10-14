@@ -2,12 +2,12 @@ import { Link, Outlet } from 'react-router-dom'
 import Footer from '../pages/Footer'
 import '../css/top.css'
 import {useEffect, useState} from 'react'
-
+import {serverUrl} from "../common/config";
 const logoutFnc = () => {
     // 로그아웃: 로그인 정보를 지우고 홈페이지로 이동(sessionStorage 삭제)
     // sessionStorage.removeItem("logStatus") -> 특정 세션스토리지만 지울 때 사용
     sessionStorage.clear()
-    axios.get("http://192.168.4.253:9092/joins/logout")
+    axios.get(serverUrl+"/joins/logout")
     //springboot서버의 session지우기
     .then((response)=>{
         //홈페이지 이동

@@ -5,6 +5,8 @@ import 'tui-color-picker/dist/tui-color-picker.css'
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css'
 import { useRef, useState } from 'react'
 import axios from 'axios'
+
+import { serverUrl } from "../../common/config";
 function DataWrite() {
     // 제목을 보관할 변수
     const [subject, setSubject] = useState('')
@@ -58,7 +60,7 @@ function DataWrite() {
         for(var i=0; i<files.length; i++){
             formData.append("files", files[i]);
         }
-        axios.post('http://192.168.4.253:9092/data/dataWrite', formData, {
+        axios.post(serverUrl+'/data/dataWrite', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

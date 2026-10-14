@@ -1,5 +1,9 @@
 import { useState } from "react"
 import axios from "axios";
+
+
+import {serverUrl} from "../common/config";
+
 function Memberform() {
     const [memberData, setmemberData] = useState({ userid: '', password: '', username: '', tel: '', email: '' })
 
@@ -67,7 +71,7 @@ function Memberform() {
         // alert("회원 등록")
         
         //비동기식으로 백엔드 --> DB저장
-        axios.post("http://192.168.4.253:9092/joins/joinsForm", memberData)
+        axios.post(serverUrl+"/joins/joinsForm", memberData)
         .then((response)=>{
             console.log("회원가입된....", response)
             if(response.data!=null && response.data>0){

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import '/src/assets/css/board.css'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
+import { serverUrl } from "../../common/config";
 
 function BoardList() {
     // 해당페이지의 레코드를 담을 변수
@@ -36,7 +37,7 @@ function BoardList() {
         if (searchData.searchWord!=''){
             queryData += "&searchKey=" + searchData.searchKey+"&searchWord="+searchData.searchWord
         }
-        axios.get(`http://192.168.4.253:9092/board/boardList${queryData}`)
+        axios.get(`${serverUrl}/board/boardList${queryData}`)
         .then((res)=>{
             console.log("게시판목록-->",res);
 

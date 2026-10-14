@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+
+import { serverUrl } from "../../common/config";
 function BoardEdit(){
     // 이전페이지에서 보낸 레코드번호(id)의 값을 Request하기
     const {id} = useParams()
@@ -11,7 +13,7 @@ function BoardEdit(){
         getBoardView();
     },[])
     function getBoardView(){
-        axios.get(`http://192.168.4.253:9092/board/boardView/${id}`)
+        axios.get(`${serverUrl}/board/boardView/${id}`)
         .then((res)=>{
             console.log(res)
             setRecord({
@@ -31,7 +33,7 @@ function BoardEdit(){
 
     function boardDelete(){
         if(confirm("글을 삭제하시겠습니까?")){
-            axios.get(`http://192.168.4.253:9092/board/boardDel/${id}`)
+            axios.get(`${serverUrl}/board/boardDel/${id}`)
             .then((res)=>{
                 if(res.data == "1"){
                     location.href = "/board/list";

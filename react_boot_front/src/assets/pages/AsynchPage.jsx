@@ -1,5 +1,6 @@
 import { useState } from 'react'; // 1. 상단에 import 추가
 
+import { serverUrl } from "../common/config";
 function AsynchPage(){
     var [result, setResult] = useState("");
     var [list, setList] = useState([]);
@@ -17,7 +18,7 @@ function AsynchPage(){
             }
         }
 
-        xHttp.open("GET", "http://192.168.4.253:9092/xmlTest?name=홍길동&age=25", true);
+        xHttp.open("GET", serverUrl+"/xmlTest?name=홍길동&age=25", true);
         xHttp.send();
     }
 
@@ -30,7 +31,7 @@ function AsynchPage(){
             }
 
         }
-        xmlHttp.open("POST", "http://192.168.4.253:9092/xmlTest2", true);
+        xmlHttp.open("POST", serverUrl+"/xmlTest2", true);
         // post방식일떄는 header를 작성한다
         xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xmlHttp.send("proCode=8888&proName=자전거&option=전기&price=120000");
@@ -55,7 +56,7 @@ function AsynchPage(){
                 setList(jsonData);
             }
         }
-        xHttp.open("GET", "http://192.168.4.253:9092/xmlTest3", true)
+        xHttp.open("GET", serverUrl+"/xmlTest3", true)
         xHttp.send();
     }
 

@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 
+import {serverUrl} from "../common/config";
+
 function Login() {
 
     // const navi = useNavigate();
@@ -29,7 +31,7 @@ function Login() {
         if (loginData.userid == undefined || loginData.userid == "") return;
         if (loginData.password == undefined || loginData.password == "") return;
         //비동기식으로 백엔드, userid, password를 가지고 백엔드 요청
-        axios.post("http://192.168.4.253:9092/joins/login", loginData)
+        axios.post(serverUrl+"/joins/login", loginData)
         .then((response)=>{
             console.log(response)
             if (!response.data){//정보가 없을때 false, 정보가 있을때 true

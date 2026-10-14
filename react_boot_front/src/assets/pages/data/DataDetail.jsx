@@ -61,6 +61,22 @@ function DataDetail(){
     }
 
 
+    const dataDel = ()=>{
+        if (confirm("자료실 글을 삭제하시겠습니까?")){ // 
+
+            axios.get(`${serverUrl}/data/dataDelete/${data.id}`)
+            .then((res)=>{
+                if(res.data=="Ok")
+                    location.href = "/data/dataList";
+                else
+                    alert("자료실 글 삭제 실패하였습니다.");
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+        }
+    }
+
     // {data.joinsEntity.userid}
     return (
         <div className="container">
@@ -113,7 +129,7 @@ function DataDetail(){
                     <div>
                         <button type="button" className="btn btn-primary" 
                                 onClick={()=>window.location.href=`/data/dataEdit/${data.id}`}>자료실 수정</button>
-                        <button type="button" className="btn btn-success">자료실 삭제</button>
+                        <button type="button" className="btn btn-success" onClick={dataDel}>자료실 삭제</button>
                     </div> 
                 )
             }

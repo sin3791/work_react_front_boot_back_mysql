@@ -22,6 +22,10 @@ import DataList from "./assets/pages/data/DataList"
 import DataWrite from "./assets/pages/data/DataWrite"
 import DataDetail from "./assets/pages/data/DataDetail"
 import DataEdit from "./assets/pages/data/DataEdit"
+import ApiLayout from "./assets/apiPage/ApiLayout"
+import ApiHome from './assets/apiPage/ApiHome'; // 예시 경로
+import KakaoMap from "./assets/apiPage/KakaoMap"
+import EmailNaver from "./assets/apiPage/EmailNaver"
 function App() {
 
 
@@ -53,6 +57,15 @@ function App() {
 
 
         </Route>
+
+        {/* {api홈페이지 } */}
+        <Route path="/openapi/apiLayout" element={<ApiLayout/>}>
+          <Route index element={<ApiHome/>}></Route>
+          <Route path="/openapi/apiLayout/KakaoMap" element={<KakaoMap/>}></Route>
+          <Route path="email" element={<EmailNaver/>}></Route>    
+    </Route>
+        
+
 
         <Route path="/admin/home" element={<AdminLayout />}>
           <Route index element={<MemberList />}></Route>

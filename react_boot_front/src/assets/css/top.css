@@ -28,13 +28,13 @@
     height: 60px;
     line-height: 60px;
     font-size: 1.2em;
-    padding: 0 20px;
+    padding: 0 10px;
 }
 
-.main-menu a {
+.main-menu a, .api-menu a{
     color: white;
 }
 
-.main-menu a:hover {
-    color: purple;
+.main-menu a:hover, .api-menu a:hover{
+    color: yellow;
 }
